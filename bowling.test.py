@@ -23,5 +23,30 @@ class TestStringMethods(unittest.TestCase):
 
         self.assertEqual(score, 90)
 
+    def test_twelve_strikes_in_a_row_score(self):
+        rolls = [10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10]
+        
+        score = self._roll_a_game_and_score(rolls)
+
+        self.assertEqual(score, 300)
+
+    def test_eleven_spare_score(self):
+        rolls = [0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10]
+        
+        score = self._roll_a_game_and_score(rolls)
+
+        self.assertEqual(score, 200)
+
+    def test_negative_input_raises_valueerror(self):
+        rolls = [-10, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10]
+        
+        self.assertRaises(ValueError, self._roll_a_game_and_score, rolls)
+
+    def test_out_of_bound_input_raises_valueerror(self):
+        rolls = [7, 5, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10, 0, 10]
+
+        self.assertRaises(ValueError, self._roll_a_game_and_score, rolls)
+
+        
 if __name__ == '__main__':
     unittest.main()
